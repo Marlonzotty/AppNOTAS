@@ -21,13 +21,16 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
-userSchema.methods.isCorrectPassword = function(password, callback) {
-  bcrypt.compare(password, this.password, function(err, same) {
+userSchema.methods.isCorrectPassword = function(password, user) {
+  /*bcrypt.compare(password, this.password, function(err, same) {
     if(err)
-    callback(err);
+    callback(user);
   else
   callback(err, same);
-  })
+  })*/
+  const compare = bcrypt.compare(password, user.password)
+  console.log(compare);
+  return compare;
 }
 
 
